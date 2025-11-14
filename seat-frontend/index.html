@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seat Map Viewer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎟️ Seat Map Viewer</h1>
+
+    <div class="seat-map">
+      <!-- Simulated seat map: 0 = vacant 🟩, 1 = occupied 🟥 -->
+      <div class="row">
+        <div class="seat vacant">🟩</div>
+        <div class="seat occupied">🟥</div>
+        <div class="seat vacant">🟩</div>
+        <div class="seat vacant">🟩</div>
+        <div class="seat occupied">🟥</div>
+      </div>
+      <div class="row">
+        <div class="seat occupied">🟥</div>
+        <div class="seat vacant">🟩</div>
+        <div class="seat vacant">🟩</div>
+        <div class="seat occupied">🟥</div>
+        <div class="seat vacant">🟩</div>
+      </div>
+      <div class="row">
+        <div class="seat vacant">🟩</div>
+        <div class="seat vacant">🟩</div>
+        <div class="seat occupied">🟥</div>
+        <div class="seat vacant">🟩</div>
+        <div class="seat occupied">🟥</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <p><span class="box vacant"></span> Vacant</p>
+      <p><span class="box occupied"></span> Occupied</p>
+    </div>
+  </div>
+</body>
+</html>
