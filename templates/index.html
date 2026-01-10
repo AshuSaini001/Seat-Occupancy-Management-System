@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Booking System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 { color: #333; }
+
+        /* Stats Box */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .stat-box {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: bold;
+        }
+
+        /* The Grid */
+        .seat-map {
+            display: inline-block;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.1s;
+            cursor: pointer;
+        }
+
+        .seat:hover {
+            transform: scale(1.1);
+        }
+
+        /* Status Colors */
+        .vacant {
+            background-color: #28a745; /* Green */
+        }
+        .occupied {
+            background-color: #dc3545; /* Red */
+        }
+
+        /* Controls Section */
+        .controls {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        input[type="file"] {
+            padding: 5px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover { background-color: #0056b3; }
+
+        .btn-reset {
+            background-color: #6c757d;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 15px;
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎬 Seat Booking System</h1>
+
+    <div class="stats-container">
+        <div class="stat-box" style="border-bottom: 4px solid #dc3545;">
+            Occupied: {{ occupied }}
+        </div>
+        <div class="stat-box" style="border-bottom: 4px solid #28a745;">
+            Vacant: {{ vacant }}
+        </div>
+    </div>
+
+    <div class="seat-map">
+        {% for row in seats %}
+            <div class="row">
+                {% set row_idx = loop.index0 %}
+                {% for seat in row %}
+                    {% set col_idx = loop.index0 %}
+                    
+                    <!-- If seat is 1, add 'occupied' class, else 'vacant' -->
+                    <a href="/toggle/{{ row_idx }}/{{ col_idx }}" 
+                       class="seat {{ 'occupied' if seat == 1 else 'vacant' }}">
+                       <!-- Optional: Show coordinates inside -->
+                       <!-- {{ row_idx }},{{ col_idx }} -->
+                    </a>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="controls">
+        <h3>Upload Seat Map (txt)</h3>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".txt" required>
+            <button type="submit">Upload File</button>
+        </form>
+        <br>
+        <a href="/reset" class="btn-reset">Reset All Seats</a>
+    </div>
+
+</body>
+</html>
