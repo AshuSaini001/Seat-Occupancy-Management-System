@@ -3,6 +3,11 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
+# Get the folder where this script is running
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Join it with the filename
+SEAT_FILE = os.path.join(BASE_DIR, "seats.txt")
+
 # Define the file path relative to the script location
 # This replaces the hardcoded F:/ path so it works on any computer
 SEAT_FILE = "seats.txt"
@@ -97,3 +102,4 @@ def reset_seats():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
